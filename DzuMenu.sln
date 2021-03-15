@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DzhuMenuWebApp", "DzhuMenuWebApp\DzhuMenuWebApp.csproj", "{880E231D-3AE7-4D0E-8E58-87AAF3CC0157}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{880E231D-3AE7-4D0E-8E58-87AAF3CC0157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880E231D-3AE7-4D0E-8E58-87AAF3CC0157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880E231D-3AE7-4D0E-8E58-87AAF3CC0157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880E231D-3AE7-4D0E-8E58-87AAF3CC0157}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

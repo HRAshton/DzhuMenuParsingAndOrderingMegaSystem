@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (Model.MenuContent == null)
+{
+    <h1>Меню на сегодня пока нет</h1>
+    return;
+}
+
+<h1>Формиратор меню (переименовать)</h1>
+
+<div style="display: inline-flex">
+    <img src="data:image/png;base64, @Convert.ToBase64String(Model.MenuImage)" alt="menu"/>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var (name, cost) in Model.MenuContent)
+        {
+            <tr name="entry">
+                <td class="name">@name</td>
+                <td class="cost" data-cost="@cost">@cost р</td>
+                <td>
+                    <input type="number" min="0" class="count"/>
+                    <button class="decrease_count">-</button>
+                    <button class="increase_count">+</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <div class="pw">
+        <h2>Превью заказа</h2>
+        
+        <div class="additional-data">
+            <label>
+                Время заказа: <input type="time" id="time"/>
+            </label>
+            <label>
+                Заказчик: <input id="username"/>
+            </label>
+        </div>
+        
+        <textarea id="preview"></textarea>
+        
+        <button id="export">Открыть в outlook</button>
+        
+        <span>Сумма: <span id="sum"></span></span>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,17 @@
+﻿.count {
+  width: 50px;
+}
+
+.pw {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column
+}
+
+.pw > * {
+  margin-bottom: 12px;
+}
+
+.pw > textarea {
+  height: 500px;
+}
