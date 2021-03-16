@@ -19,3 +19,7 @@
 sup {
   cursor: help;
 }
+
+#deposit {
+  cursor: pointer;
+}

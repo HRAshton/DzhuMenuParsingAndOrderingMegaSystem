@@ -25,6 +25,11 @@ function init() {
     
     const toDepositButton = document.getElementById("to_deposit");
     toDepositButton.onclick = addToDeposit;
+    
+    const depositValueContainer = document.getElementById("deposit");
+    depositValueContainer.onclick = setDeposit;
+
+    localStorage.setItem("deposit", localStorage.getItem("deposit") ?? 0);
 
     calculate();
     fillDeposit();
@@ -102,8 +107,21 @@ function exportToOutlook() {
 
 function addToDeposit() {
     const appendValue = parseInt(document.getElementById("remains").innerText);
-    const oldValue = parseInt(localStorage.getItem("deposit") ?? 0);
+    const oldValue = parseInt(localStorage.getItem("deposit"));
     const newValue = oldValue + appendValue;
+    
+    localStorage.setItem("deposit", newValue);
+    fillDeposit();
+}
+
+function setDeposit() {
+    const oldValue = parseInt(localStorage.getItem("deposit"));
+    const newValue = prompt("Введите новое значение депозита", oldValue.toString());
+    
+    const parsedValue = parseInt(newValue);
+    if (isNaN(parsedValue)) {
+        return;
+    }
     
     localStorage.setItem("deposit", newValue);
     fillDeposit();
