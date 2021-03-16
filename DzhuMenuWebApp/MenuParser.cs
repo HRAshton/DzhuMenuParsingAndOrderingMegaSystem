@@ -134,7 +134,16 @@ namespace DzhuMenuWebApp
 					@"[^\d]",
 					string.Empty);
 
-				var pair = (name, int.Parse(cost));
+				(string name, int) pair;
+				try
+				{
+					pair = (name, int.Parse(cost));
+				}
+				catch
+				{
+					pair = (name, 0);
+				}
+
 				entries.Add(pair);
 			}
 

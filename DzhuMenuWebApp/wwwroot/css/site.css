@@ -15,3 +15,11 @@
 .pw > textarea {
   height: 500px;
 }
+
+sup {
+  cursor: help;
+}
+
+#deposit {
+  cursor: pointer;
+}

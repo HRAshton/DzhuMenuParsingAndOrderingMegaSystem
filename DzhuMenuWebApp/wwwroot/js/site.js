@@ -22,6 +22,17 @@ function init() {
     usernameInput.oninput = (e) => setUsername(e.target);
     
     document.getElementById('export').onclick = exportToOutlook;
+    
+    const toDepositButton = document.getElementById("to_deposit");
+    toDepositButton.onclick = addToDeposit;
+    
+    const depositValueContainer = document.getElementById("deposit");
+    depositValueContainer.onclick = setDeposit;
+
+    localStorage.setItem("deposit", localStorage.getItem("deposit") ?? 0);
+
+    calculate();
+    fillDeposit();
 }
 
 function addEntry(countElement) {
@@ -45,10 +56,14 @@ function calculate() {
     
     const format = `Добрый день,\n\nЗаказ на ${time} с собой:\n${order}\n\nС уважением,\n${username}`;
     document.getElementById("preview").textContent = format;
+
+    const sum = entries.reduce((acc, curr, i, arr) => acc += curr.count * curr.cost, 0);
+    document.getElementById("sum").innerText =
+        document.getElementById("sum2").innerText = sum.toString();
     
-    document.getElementById("sum").innerText = entries
-            .reduce((acc, curr, i, arr) => acc += curr.count * curr.cost, 0)
-            .toString();
+    const remains = 390 - sum;
+    document.getElementById("remains").innerText = remains.toString();
+    window.remains = remains;
 }
 
 function getDataFromRow(tr) {
@@ -88,4 +103,31 @@ function exportToOutlook() {
     const body = document.getElementById("preview").textContent;
     
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+function addToDeposit() {
+    const appendValue = parseInt(document.getElementById("remains").innerText);
+    const oldValue = parseInt(localStorage.getItem("deposit"));
+    const newValue = oldValue + appendValue;
+    
+    localStorage.setItem("deposit", newValue);
+    fillDeposit();
+}
+
+function setDeposit() {
+    const oldValue = parseInt(localStorage.getItem("deposit"));
+    const newValue = prompt("Введите новое значение депозита", oldValue.toString());
+    
+    const parsedValue = parseInt(newValue);
+    if (isNaN(parsedValue)) {
+        return;
+    }
+    
+    localStorage.setItem("deposit", newValue);
+    fillDeposit();
+}
+
+function fillDeposit() {
+    const value = localStorage.getItem("deposit") || 0;
+    document.getElementById("deposit").innerText = value;
 }

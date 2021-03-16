@@ -39,24 +39,49 @@
         }
         </tbody>
     </table>
-    
+
     <div class="pw">
         <h2>Превью заказа</h2>
-        
+
         <div class="additional-data">
             <label>
                 Время заказа: <input type="time" id="time"/>
             </label>
             <label>
-                Заказчик: <input id="username"/>
+                Заказчик
+                <sup title="Сохранятся в локальном хранилище браузера. Сохраненное значение пропадет при его очистке.">⚠</sup>
+                : <input id="username"/>
             </label>
         </div>
-        
+
         <textarea id="preview"></textarea>
-        
+
         <button id="export">Открыть в outlook</button>
-        
-        <span>Сумма: <span id="sum"></span></span>
+
+        <table>
+            <tr>
+                <td>Сумма:</td>
+                <td><span id="sum">0</span> р.</td>
+            </tr>
+            <tr>
+                <td>Дневной остаток:</td>
+                <td>390 - <span id="sum2">0</span> = <span id="remains">0</span> р.</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="to_deposit">▼ Внести на депозит ▼</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Текущий депозит
+                    <sup title="Сохранятся в локальном хранилище браузера. Сохраненное значение пропадет при его очистке.">⚠</sup>
+                    :
+                </td>
+                <td><span id="deposit"></span> р.</td>
+            </tr>
+        </table>
     </div>
 </div>
 
