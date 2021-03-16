@@ -61,7 +61,7 @@ function calculate() {
     document.getElementById("sum").innerText =
         document.getElementById("sum2").innerText = sum.toString();
     
-    const remains = 390 - sum;
+    const remains = 350 - sum;
     document.getElementById("remains").innerText = remains.toString();
     window.remains = remains;
 }
