@@ -31,6 +31,10 @@ function init() {
 
     localStorage.setItem("deposit", localStorage.getItem("deposit") ?? 0);
 
+    const addCostsInput = document.getElementById("addCosts");
+    addCostsInput.checked = window.localStorage.getItem("addCosts") == 'true';
+    addCostsInput.oninput = (e) => setAddCosts(e.target);
+
     calculate();
     fillDeposit();
 }
@@ -52,12 +56,23 @@ function calculate() {
     
     const username = document.getElementById("username").value;
     const time = document.getElementById("time").value.split(":").slice(0, 2).join(":");
-    const order = entries.map(entry => `- ${entry.count} ${entry.name}`).join("\n");
+    const addCosts = document.getElementById("addCosts").checked;
+
+    const order = [];
+    let sum = 0;
+    for (var entry of entries) {
+        order.push(`- ${entry.count} ${entry.name}` + (addCosts && entry.cost > 10 ? ` (${entry.cost * entry.count})` : ""));
+        if (entry.cost > 10) {
+            sum += entry.cost * entry.count;
+        }
+    }
+    if (addCosts && entries.every(x => x.cost > 10)) {
+        order.push(`---\nВсего: ${sum} р.\n`);
+    }
     
-    const format = `Добрый день,\n\nЗаказ на ${time} с собой:\n${order}\n\nС уважением,\n${username}`;
+    const format = `Добрый день,\n\nЗаказ на ${time} с собой:\n${order.join('\n')}\n\nС уважением,\n${username}`;
     document.getElementById("preview").textContent = format;
 
-    const sum = entries.reduce((acc, curr, i, arr) => acc += curr.count * curr.cost, 0);
     document.getElementById("sum").innerText =
         document.getElementById("sum2").innerText = sum.toString();
     
@@ -94,6 +109,11 @@ function setUsername(usernameElement) {
 }
 
 function setTime() {
+    calculate();
+}
+
+function setAddCosts(addCostsElement) {
+    window.localStorage.setItem("addCosts", addCostsElement.checked);
     calculate();
 }
 
