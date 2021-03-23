@@ -113,10 +113,9 @@ namespace DzhuMenuWebApp
 			foreach (var (nameRect, costRect) in entryBorders)
 			{
 				var nameProcessor = r.Process(pix, nameRect);
-				var name = Regex.Replace(
-					nameProcessor.GetText().Trim(' ', '\n', '.', ',', '\''),
-					@"[^а-яА-Я(,\s/]",
-					string.Empty);
+				var rawText = nameProcessor.GetText().Trim(' ', '\n', '.', ',', '\'');
+				var name = Regex.Replace(rawText, @"[^а-яА-Я(),\s/]", string.Empty);
+				name = Regex.Replace(name, @"\([^\)]+$", string.Empty);
 				nameProcessor.Dispose();
 
 				var costProcessor = r.Process(pix, costRect, PageSegMode.SingleWord);
